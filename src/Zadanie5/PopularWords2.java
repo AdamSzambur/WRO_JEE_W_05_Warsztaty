@@ -59,7 +59,7 @@ public class PopularWords2 {
                 }
             }
 
-            // sortowanie tablicy
+            // sortowanie tablicy najwyzsza wartosc -> najnizsza row = 1 -ilosc slow na stronie, 2 - slowa
 
             popularWords = sortListTwo(popularWords,1);
 
@@ -93,11 +93,22 @@ public class PopularWords2 {
             for (int j=0; j<n-i-1; j++) {
                 Object[] object1 = tab.get(j);
                 Object[] object2 = tab.get(j+1);
-                // do poprawnego działania powinienem zaimplementowac compareTo dlatego row tylko 1 bo to integer :)
-                if ((int)object1[row] < (int)object2[row]) {
+                boolean torf = false;
+
+                if (object1[row] instanceof Integer) {
+                    if ((int) object1[row] < (int) object2[row]) {
+                        torf = true;
+                    }
+                } else {
+                    if ((object1[row].toString().compareTo(object2[row].toString())) < 0) {
+                        torf = true;
+                    }
+                }
+
+                if (torf) {
                     Object[] temp = tab.get(j);
-                    tab.set(j,object2);
-                    tab.set(j+1,temp);
+                    tab.set(j, object2);
+                    tab.set(j + 1, temp);
                 }
             }
         }
